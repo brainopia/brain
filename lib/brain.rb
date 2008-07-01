@@ -4,6 +4,7 @@ $:.unshift(File.dirname(__FILE__)) unless
 require 'mathn'
 
 module Brain
+  autoload 'Hopfield', 'brain/hopfield'
 end
 
 module Brain::Extensions
