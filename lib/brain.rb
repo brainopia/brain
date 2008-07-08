@@ -6,8 +6,3 @@ require 'mathn'
 module Brain
   autoload 'Hopfield', 'brain/hopfield'
 end
-
-module Brain::Extensions
-end
-
-Brain.send :include, Brain::Extensions
