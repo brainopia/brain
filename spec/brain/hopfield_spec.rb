@@ -32,7 +32,7 @@ describe Brain::Hopfield do
     end
     
     it "should return an arity" do
-      @net.arity.should == 3
+      @net.dimension.should == 3
     end
     
     it "should create an object for an association with a given sample" do

@@ -13,7 +13,7 @@ describe Brain::Hopfield::Sample do
   
   it "should check if the sample belongs to learning samples" do
     sample = Hopfield::Sample.new(Hopfield[ [1, 1, 1] ], [1, 1, 1])
-    sample.trained?.should == true
+    sample.associated?.should == true
   end
 
   describe '(after initialization)' do
@@ -25,12 +25,12 @@ describe Brain::Hopfield::Sample do
       @sample = Hopfield::Sample.new @net, @tested_sample
     end
     
-    it "should start an epochs count with 0" do
-      @sample.epochs.should == 0
+    it "should start an iterations count with 0" do
+      @sample.iterations.should == 0
     end
     
     it "should return a status of training" do
-      @sample.trained?.should == false
+      @sample.associated?.should == false
     end
     
     it "should return a current associated sample" do
@@ -45,23 +45,23 @@ describe Brain::Hopfield::Sample do
       @sample.run(50).should == @learned_sample
     end
     
-    it "should increment epochs after an every run" do
-      @sample.stub!(:trained?).and_return(false)
+    it "should increment iterations after an every run" do
+      @sample.stub!(:associated?).and_return(false)
       3.times { @sample.run(3) }
-      @sample.epochs.should == 9
+      @sample.iterations.should == 9
     end
     
-    it "should stop incrementing epochs after it's trained" do
-      @sample.stub!(:trained?).and_return(false)
+    it "should stop incrementing iterations after it's associated" do
+      @sample.stub!(:associated?).and_return(false)
       @sample.run(4)
-      @sample.stub!(:trained?).and_return(true)
+      @sample.stub!(:associated?).and_return(true)
       @sample.run(4)
-      @sample.epochs.should == 4
+      @sample.iterations.should == 4
     end
     
     it "should be ran by default one time" do
       @sample.run
-      @sample.epochs.should == 1
+      @sample.iterations.should == 1
     end
     
     it "should return an using net" do
@@ -70,11 +70,18 @@ describe Brain::Hopfield::Sample do
     
     it "shouldn't increase energy" do
       previous_energy = @sample.energy
-      until @sample.trained?
+      until @sample.associated?
         @sample.run
         previous_energy.should_not > @sample.energy
         previous_energy = @sample.energy
       end
     end
+    
+    it "should return an inverse version of the learning sample if there is too much noise in the initial sample" do
+      net = Brain::Hopfield[[1, 1, 1, 1]]
+      sample = net.associate [1, -1, -1, -1]
+      sample.run until sample.associated?
+      sample.current.should == [-1, -1, -1, -1]
+    end    
   end
 end
