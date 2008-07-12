@@ -5,23 +5,27 @@
 
 == DESCRIPTION:
 
-Implementation of fundamental types of neural networks which includes multilayer perceptron, Kohonen net and Hopfield net.
+Implements several types of Neural Networks such as multilayer perceptron (data classification), Kohonen net (data clusterization), Hopfield net (data association).
 
-== FEATURES/PROBLEMS:
+== FEATURES:
 
-* FIX (list of features or problems)
+Currently supports:
+* Hopfield net
 
 == SYNOPSIS:
 
-  FIX (code sample of usage)
-
-== REQUIREMENTS:
-
-* FIX (list of requirements)
+Basic examples:
+  
+* Hopfield net
+    
+    sample = Brain::Hopfield[[-1, -1, -1, -1], [1, 1, 1, 1]].associate [1, 1, -1, 1]
+    sample.run until sample.associated?
+    sample.current # => [1, 1, 1, 1]
+  
 
 == INSTALL:
 
-* FIX (sudo gem install, anything else)
+  sudo gem install brain
 
 == LICENSE:
 

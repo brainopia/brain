@@ -2,7 +2,7 @@ require 'brain/version'
 
 AUTHOR = 'Ravil Bayramgalin'  # can also be an array of Authors
 EMAIL = "ravwar@gmail.com"
-DESCRIPTION = "Implementation of fundamental types of neural networks which includes multilayer perceptron, Kohonen net and Hopfield net."
+DESCRIPTION = "Implements several types of Neural Networks such as multilayer perceptron (data classification), Kohonen net (data clusterization), Hopfield net (data association). Current development takes place in http://github.com/brainopia/brain."
 GEM_NAME = 'brain' # what ppl will type to install your gem
 RUBYFORGE_PROJECT = 'brain' # The unix name for your project
 HOMEPATH = "http://#{RUBYFORGE_PROJECT}.rubyforge.org"
